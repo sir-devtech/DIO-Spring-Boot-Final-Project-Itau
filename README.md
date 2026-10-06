@@ -25,12 +25,14 @@ gradlew.bat bootRun
 
 Abre em `http://localhost:8080`. O banco é H2 na memória. Sem Docker. Sem chave da OpenAI para criar, listar e ver o resumo.
 
-```bat
-curl -X POST http://localhost:8080/transactions -H "Content-Type: application/json" -d "{\"description\":\"Starbucks\",\"amount\":50,\"category\":\"FOOD\"}"
+No PowerShell as aspas do JSON ficam simples. Com barra invertida o corpo chega quebrado e a API responde 400 sem chegar na regra.
 
-curl http://localhost:8080/transactions/resumo
+```powershell
+curl.exe -X POST http://localhost:8080/transactions -H "Content-Type: application/json" --data-raw '{"description":"Starbucks","amount":50,"category":"FOOD"}'
 
-curl http://localhost:8080/transactions/FOOD
+curl.exe http://localhost:8080/transactions/resumo
+
+curl.exe http://localhost:8080/transactions/FOOD
 ```
 
 `amount` 0 ou negativo volta 400 com `{"erro":"Valor tem que ser maior que zero."}`.
